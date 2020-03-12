@@ -3,13 +3,9 @@ import XCTest
 
 final class StaticTableViewTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(StaticTableView().text, "Hello, World!")
+        let tv1 = StaticTableView(style: .plain)
+        let tv2 = StaticTableView(style: .grouped)
+        XCTAssert(tv1.style == .plain)
+        XCTAssert(tv2.style == .grouped)
     }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }
