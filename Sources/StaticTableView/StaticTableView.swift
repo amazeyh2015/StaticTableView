@@ -17,9 +17,7 @@ public class StaticTableView: UIScrollView {
         alwaysBounceVertical = true
         
         let tgr = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped(_:)))
-        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(tableViewLongPressed(_:)))
         addGestureRecognizer(tgr)
-        addGestureRecognizer(lpgr)
     }
     
     required init?(coder: NSCoder) {
@@ -138,13 +136,6 @@ public class StaticTableView: UIScrollView {
         guard let cell = cellAtPoint(point) else { return }
         cell.setSelected(true, animated: false)
         cell.didSelectAction?()
-    }
-    
-    @objc func tableViewLongPressed(_ sender: UITapGestureRecognizer) {
-        let point = sender.location(in: self)
-        guard let cell = cellAtPoint(point) else { return }
-        let highlighted = sender.state == .began
-        cell.setHighlighted(highlighted, animated: false)
     }
     
     func cellAtPoint(_ point: CGPoint) -> StaticTableViewCell? {

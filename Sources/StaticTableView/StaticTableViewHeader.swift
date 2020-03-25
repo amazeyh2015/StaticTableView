@@ -10,6 +10,7 @@ import UIKit
 
 open class StaticTableViewHeader: UIView, StaticTableViewElement {
     
+    /// Calculate cell height with its table view. Return 30 by defualt
     open func heightInTableView(_ tableView: StaticTableView) -> CGFloat {
         return 30
     }
