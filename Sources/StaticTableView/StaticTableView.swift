@@ -28,7 +28,7 @@ public class StaticTableView: UIScrollView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        updateLayoutIfNeeded1()
+        updateLayoutIfNeeded()
     }
     
     /// Set sections for table view. This will automatically reset the elements by current sections.
@@ -36,7 +36,6 @@ public class StaticTableView: UIScrollView {
         didSet {
             removeAllElements()
             addAllElements()
-            updateLayoutIfNeeded2()
         }
     }
     
@@ -73,23 +72,12 @@ public class StaticTableView: UIScrollView {
     var oldLayoutIdentifier: LayoutIdentifier?
     
     /// Used when layoutSubviews method invoked
-    func updateLayoutIfNeeded1() {
+    func updateLayoutIfNeeded() {
         let newLayoutIdentifier = LayoutIdentifier(frame.size, layoutMargins)
         if newLayoutIdentifier == oldLayoutIdentifier {
             return
         }
         oldLayoutIdentifier = newLayoutIdentifier
-        updateLayout()
-    }
-    
-    /// Used when data source changed
-    func updateLayoutIfNeeded2() {
-        if frame.width == 0 {
-            return
-        }
-        if superview == nil {
-            return
-        }
         updateLayout()
     }
     
