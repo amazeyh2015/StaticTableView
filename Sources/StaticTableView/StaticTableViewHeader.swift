@@ -1,16 +1,16 @@
 //
 //  StaticTableViewHeader.swift
-//  StaticTableView
+//  test001
 //
-//  Created by 于涵 on 2020/3/11.
+//  Created by 于涵 on 2020/3/22.
 //  Copyright © 2020 yuhan. All rights reserved.
 //
 
 import UIKit
 
-open class StaticTableViewHeader: UIView {
+open class StaticTableViewHeader: UIView, StaticTableViewElement {
     
-    open func height(in tableView: UITableView) -> CGFloat {
-        return 0
+    open func heightInTableView(_ tableView: StaticTableView) -> CGFloat {
+        return 30
     }
 }
