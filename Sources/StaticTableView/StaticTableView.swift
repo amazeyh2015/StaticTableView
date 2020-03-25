@@ -70,14 +70,15 @@ public class StaticTableView: UIScrollView {
     }
     
     /// Record width for last layout
-    var oldWidth: CGFloat = 0
+    var oldLayoutIdentifier: LayoutIdentifier?
     
     /// Used when layoutSubviews method invoked
     func updateLayoutIfNeeded1() {
-        if frame.width == oldWidth {
+        let newLayoutIdentifier = LayoutIdentifier(frame.size, layoutMargins)
+        if newLayoutIdentifier == oldLayoutIdentifier {
             return
         }
-        oldWidth = frame.width
+        oldLayoutIdentifier = newLayoutIdentifier
         updateLayout()
     }
     
