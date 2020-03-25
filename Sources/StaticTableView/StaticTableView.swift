@@ -34,6 +34,7 @@ public class StaticTableView: UIScrollView {
         didSet {
             removeAllElements()
             addAllElements()
+            setNeedsLayout()
         }
     }
     
