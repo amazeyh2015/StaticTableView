@@ -104,7 +104,6 @@ public class StaticTableView: UIScrollView {
             item.frame.origin.y = y
             if item === element {
                 item.frame.size.height = item.heightInTableView(self)
-                item.setNeedsLayout()
             }
             y = item.frame.maxY
         }
@@ -120,7 +119,6 @@ public class StaticTableView: UIScrollView {
             element.frame.origin.y = y
             if isElement(element, in: elements) {
                 element.frame.size.height = element.heightInTableView(self)
-                element.setNeedsLayout()
             }
             y = element.frame.maxY
         }
