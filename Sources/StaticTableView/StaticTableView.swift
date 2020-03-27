@@ -24,8 +24,15 @@ public class StaticTableView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
+    // Update layout if frame changed
+    public override var frame: CGRect {
+        didSet {
+            updateLayoutIfNeeded()
+        }
+    }
+    
+    // Update layout if layout margins changed
+    public override func layoutMarginsDidChange() {
         updateLayoutIfNeeded()
     }
     
@@ -66,10 +73,10 @@ public class StaticTableView: UIScrollView {
         }
     }
     
-    /// Record width for last layout
+    /// Record previous layout infomation
     var oldLayoutIdentifier: LayoutIdentifier?
     
-    /// Used when layoutSubviews method invoked
+    /// Update lauout for subviews if layout infomation changed
     func updateLayoutIfNeeded() {
         let newLayoutIdentifier = LayoutIdentifier(frame.size, layoutMargins)
         if newLayoutIdentifier == oldLayoutIdentifier {
