@@ -6,19 +6,14 @@ import PackageDescription
 let package = Package(
     name: "StaticTableView",
     platforms: [
-        .iOS(.v13), .macOS(.v10_15)
+        .iOS("13.0"), 
+        .macOS("11.0")
     ],
     products: [
-        .library(
-            name: "StaticTableView",
-            targets: ["StaticTableView"]),
+        .library(name: "StaticTableView", targets: ["StaticTableView"])
     ],
     targets: [
-        .target(
-            name: "StaticTableView",
-            dependencies: []),
-        .testTarget(
-            name: "StaticTableViewTests",
-            dependencies: ["StaticTableView"]),
+        .target(name: "StaticTableView", dependencies: []),
+        .testTarget(name: "StaticTableViewTests", dependencies: ["StaticTableView"])
     ]
 )

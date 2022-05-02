@@ -12,8 +12,8 @@ public class StaticTableView: UIScrollView {
     
     public init() {
         super.init(frame: .zero)
-        preservesSuperviewLayoutMargins = true
         backgroundColor = .systemBackground
+        preservesSuperviewLayoutMargins = true
         alwaysBounceVertical = true
         
         let tgr = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped(_:)))
@@ -44,7 +44,10 @@ public class StaticTableView: UIScrollView {
         }
     }
     
+    /// Store all table view elements
     var elements: [StaticTableViewElement] = []
+    
+    /// Store all table view cells
     var cells: [StaticTableViewCell] = []
     
     func removeAllElements() {
@@ -73,42 +76,40 @@ public class StaticTableView: UIScrollView {
         }
     }
     
-    /// Record previous layout infomation
-    var oldLayoutIdentifier: LayoutIdentifier?
+    /// Current element width
+    var elementWidth: CGFloat = 0
     
     /// Update lauout for subviews if layout infomation changed
     func updateLayoutIfNeeded() {
-        let newLayoutIdentifier = LayoutIdentifier(frame.size, layoutMargins)
-        if newLayoutIdentifier == oldLayoutIdentifier {
+        if frame.width == elementWidth {
             return
         }
-        oldLayoutIdentifier = newLayoutIdentifier
+        elementWidth = frame.width
         updateLayout()
     }
     
-    /// Update layout for all current element in table view
+    /// Update layout for all elements in table view
     public func updateLayout() {
         var y: CGFloat = 0
         
         for element in elements {
             element.frame.origin.y = y
             element.frame.size.width = frame.width
-            element.frame.size.height = element.heightInTableView(self)
-            element.setNeedsLayout()
+            element.frame.size.height = element.heightInTableView()
             y = element.frame.maxY
         }
         
         contentSize = CGSize(width: frame.width, height: y)
     }
     
-    /// Update layout for the given element
+    /// Update layout for the given element in table view
     public func updateLayoutForElement(_ element: StaticTableViewElement) {
         var y: CGFloat = 0
         
         for item in elements {
             item.frame.origin.y = y
             if item === element {
-                item.frame.size.height = item.heightInTableView(self)
+                item.frame.size.height = item.heightInTableView()
             }
             y = item.frame.maxY
         }
@@ -116,32 +117,9 @@ public class StaticTableView: UIScrollView {
         contentSize = CGSize(width: frame.width, height: y)
     }
     
-    /// Update layout for the given elements
-    public func updateLayoutForElements(_ elements: [StaticTableViewElement]) {
-        var y: CGFloat = 0
-        
-        for element in elements {
-            element.frame.origin.y = y
-            if isElement(element, in: elements) {
-                element.frame.size.height = element.heightInTableView(self)
-            }
-            y = element.frame.maxY
-        }
-        
-        contentSize = CGSize(width: frame.width, height: y)
-    }
-    
-    func isElement(_ element: StaticTableViewElement, in elements: [StaticTableViewElement]) -> Bool {
-        for item in elements where item === element {
-            return true
-        }
-        return false
-    }
-    
     @objc func tableViewTapped(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: self)
         guard let cell = cellAtPoint(point) else { return }
-        cell.setSelected(true, animated: false)
         cell.didSelectAction?()
     }
     

@@ -10,8 +10,8 @@ import UIKit
 
 open class StaticTableViewFooter: UIView, StaticTableViewElement {
     
-    /// Calculate cell height with its table view. Return 30 by defualt
-    open func heightInTableView(_ tableView: StaticTableView) -> CGFloat {
+    /// Calculate footer height. Return 30 by defualt
+    open func heightInTableView() -> CGFloat {
         return 30
     }
 }

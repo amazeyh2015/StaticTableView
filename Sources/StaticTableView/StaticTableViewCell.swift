@@ -13,13 +13,8 @@ open class StaticTableViewCell: UIView, StaticTableViewElement {
     /// Custom handler performed when cell did select
     open var didSelectAction: (() -> Void)?
     
-    /// Transform between regular and selected state. Does nothing by default
-    open func setSelected(_ selected: Bool, animated: Bool) {
-        
-    }
-    
-    /// Calculate cell height with its table view. Return 50 by defualt
-    open func heightInTableView(_ tableView: StaticTableView) -> CGFloat {
+    /// Calculate cell height. Return 50 by defualt
+    open func heightInTableView() -> CGFloat {
         return 50
     }
 }

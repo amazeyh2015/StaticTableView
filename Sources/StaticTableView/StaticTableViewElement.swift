@@ -10,6 +10,6 @@ import UIKit
 
 public protocol StaticTableViewElement: UIView {
     
-    /// Calculate cell height with its table view
-    func heightInTableView(_ tableView: StaticTableView) -> CGFloat
+    /// Calculate element height
+    func heightInTableView() -> CGFloat
 }
