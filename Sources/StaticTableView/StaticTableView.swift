@@ -12,6 +12,7 @@ public class StaticTableView: UIScrollView {
     
     public init() {
         super.init(frame: .zero)
+        
         backgroundColor = .systemBackground
         preservesSuperviewLayoutMargins = true
         alwaysBounceVertical = true
@@ -76,15 +77,17 @@ public class StaticTableView: UIScrollView {
         }
     }
     
-    /// Current element width
-    var elementWidth: CGFloat = 0
+    var lastLayoutWidth: CGFloat = 0
+    
+    var lastLayoutMargin: UIEdgeInsets = .zero
     
     /// Update lauout for subviews if layout infomation changed
     func updateLayoutIfNeeded() {
-        if frame.width == elementWidth {
+        if frame.width == lastLayoutWidth && layoutMargins == lastLayoutMargin {
             return
         }
-        elementWidth = frame.width
+        lastLayoutWidth = frame.width
+        lastLayoutMargin = layoutMargins
         updateLayout()
     }
     

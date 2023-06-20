@@ -12,4 +12,7 @@ public protocol StaticTableViewElement: UIView {
     
     /// Calculate element height
     func heightInTableView() -> CGFloat
+    
+    /// Do actually layout for subviews
+    func updateSubviewsLayout()
 }
